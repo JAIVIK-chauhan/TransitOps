@@ -1,167 +1,36 @@
-# TransitOps
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-Transit Operations Management System built with the MERN stack (MongoDB, Express, React, Node.js).
+## Getting Started
 
-## Project Structure
-
-```
-TransitOps/
-├── server/          # Node.js/Express backend
-├── client/          # React frontend
-└── package.json     # Root package for managing both servers
-```
-
-## Prerequisites
-
-- Node.js (v14 or higher)
-- npm or yarn
-- MongoDB (local or cloud instance)
-
-## Installation
-
-### 1. Clone the repository and navigate to the project
-
-```bash
-cd TransitOps
-```
-
-### 2. Install root dependencies
-
-```bash
-npm install
-```
-
-This will install `concurrently` and `nodemon` for development.
-
-### 3. Install server dependencies
-
-```bash
-cd server
-npm install
-cd ..
-```
-
-### 4. Install client dependencies
-
-```bash
-cd client
-npm install
-cd ..
-```
-
-### 5. Configure environment variables
-
-Create a `.env` file in the `server` directory:
-
-```bash
-cp server/.env.example server/.env
-```
-
-Edit `server/.env` and update the MongoDB URI and other configuration as needed.
-
-## Running the Project
-
-### Development Mode (both server and client)
+First, run the development server:
 
 ```bash
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-This will run:
-- Backend server on `http://localhost:5000`
-- Frontend on `http://localhost:3000`
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### Run only the server
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-```bash
-npm run server
-```
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-### Run only the client
+## Learn More
 
-```bash
-npm run client
-```
+To learn more about Next.js, take a look at the following resources:
 
-### Production Build
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-```bash
-npm run build
-```
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## API Endpoints
+## Deploy on Vercel
 
-### Health Check
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-- **GET** `/api/health` - Check if the server is running
-
-## Available Scripts
-
-### Root Level
-
-- `npm start` - Start the production server
-- `npm run server` - Start development server with nodemon
-- `npm run client` - Start React development server
-- `npm run dev` - Run both server and client concurrently
-- `npm run build` - Build the React client
-
-### Server
-
-- `npm start` - Start the server
-- `npm run dev` - Start with nodemon
-
-### Client
-
-- `npm start` - Start development server
-- `npm run build` - Create production build
-- `npm test` - Run tests
-
-## Technology Stack
-
-### Backend
-- **Express.js** - Web framework
-- **MongoDB** - NoSQL database
-- **Mongoose** - MongoDB ODM
-- **JWT** - Authentication
-- **bcryptjs** - Password hashing
-- **CORS** - Cross-origin resource sharing
-
-### Frontend
-- **React 18** - UI library
-- **React Router v6** - Client-side routing
-- **Axios** - HTTP client
-
-## Development Workflow
-
-1. The backend server runs on port 5000
-2. The frontend runs on port 3000
-3. The frontend is configured to proxy API requests to the backend (see `client/package.json`)
-4. Use `npm run dev` to run both concurrently during development
-
-## Environment Variables
-
-### Server (.env)
-
-```
-PORT=5000
-MONGODB_URI=mongodb://localhost:27017/transitops
-NODE_ENV=development
-JWT_SECRET=your_jwt_secret_key_here
-```
-
-## Project Next Steps
-
-1. Set up MongoDB connection
-2. Create data models (schemas)
-3. Build API routes
-4. Implement authentication
-5. Create React components
-6. Connect frontend to backend APIs
-
-## License
-
-ISC
-
-## Author
-
-Jaivik Chauhan
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
