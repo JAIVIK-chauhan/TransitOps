@@ -30,7 +30,7 @@ router.post('/register', async (req, res) => {
       name,
       email,
       password,
-      role: role || 'dispatcher',
+      role: role || 'Fleet Manager',
     });
 
     res.status(201).json({

@@ -1,9 +1,21 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getRoleBadge, getRoleLabel, getRoleNavigation } from '../utils/roleConfig';
+import './Dashboard.css';
+
+const statCards = [
+  { label: 'Active Vehicles', value: '128', delta: '+8.4%' },
+  { label: 'Active Trips', value: '34', delta: '+12%' },
+  { label: 'Maintenance', value: '6', delta: '2 urgent' },
+  { label: 'Fuel Efficiency', value: '18.2 mpg', delta: '+3.1%' },
+];
 
 export default function DashboardPage() {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem('user') || '{}');
+  const role = getRoleLabel(user.role || 'Fleet Manager');
+  const badge = getRoleBadge(role);
+  const navigation = getRoleNavigation(role);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -12,54 +24,82 @@ export default function DashboardPage() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', padding: '2rem', background: '#f3f4f6' }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <header style={{ 
-          display: 'flex', 
-          justifyContent: 'space-between', 
-          alignItems: 'center',
-          marginBottom: '2rem',
-          background: 'white',
-          padding: '1rem',
-          borderRadius: '8px'
-        }}>
-          <h1 style={{ margin: 0, fontSize: '1.5rem', color: '#1f2937' }}>Dashboard</h1>
-          <button
-            onClick={handleLogout}
-            style={{
-              padding: '0.5rem 1rem',
-              background: '#667eea',
-              color: 'white',
-              border: 'none',
-              borderRadius: '6px',
-              cursor: 'pointer',
-              fontWeight: '600'
-            }}
-          >
-            Logout
-          </button>
-        </header>
-
-        <div style={{
-          background: 'white',
-          padding: '2rem',
-          borderRadius: '8px',
-          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)'
-        }}>
-          <h2>Welcome, {user.name}!</h2>
-          <p style={{ color: '#6b7280', marginTop: '0.5rem' }}>
-            Email: {user.email}
-          </p>
-          <p style={{ color: '#6b7280' }}>
-            Role: {user.role}
-          </p>
-          <div style={{ marginTop: '2rem' }}>
-            <p style={{ color: '#6b7280', fontStyle: 'italic' }}>
-              More dashboard content coming soon...
-            </p>
+    <div className="dashboard-shell">
+      <aside className="dashboard-sidebar">
+        <div className="sidebar-brand">
+          <div className="sidebar-logo">TO</div>
+          <div>
+            <h2>TransitOps</h2>
+            <p>Operations Command</p>
           </div>
         </div>
-      </div>
+
+        <div className="sidebar-section">
+          <p className="sidebar-label">Workspace</p>
+          {navigation.map((item) => (
+            <button key={item.label} className="sidebar-link">
+              <span>{item.label}</span>
+            </button>
+          ))}
+        </div>
+
+        <div className="sidebar-card">
+          <p className="sidebar-label">Current Access</p>
+          <div className={`role-pill role-${badge}`}>{role}</div>
+          <p className="sidebar-meta">Live tracking, dispatch, and fleet oversight.</p>
+        </div>
+      </aside>
+
+      <main className="dashboard-main">
+        <header className="dashboard-header">
+          <div>
+            <p className="eyebrow">Transit Operations ERP</p>
+            <h1>Welcome back, {user.name || 'Operator'}.</h1>
+          </div>
+          <button className="logout-button" onClick={handleLogout}>Logout</button>
+        </header>
+
+        <section className="hero-panel">
+          <div>
+            <p className="hero-kicker">Mission control</p>
+            <h2>Monitor your fleet, dispatch confidently, and act on alerts in real time.</h2>
+            <p className="hero-copy">This premium control center is designed for fleet managers, safety officers, analysts, and drivers alike.</p>
+          </div>
+          <div className="hero-badge">Live • 24/7</div>
+        </section>
+
+        <section className="stats-grid">
+          {statCards.map((card) => (
+            <article key={card.label} className="stat-card">
+              <p>{card.label}</p>
+              <h3>{card.value}</h3>
+              <span>{card.delta}</span>
+            </article>
+          ))}
+        </section>
+
+        <section className="content-grid">
+          <article className="panel-card">
+            <div className="panel-heading">
+              <h3>Today’s Priority Queue</h3>
+              <span>Updated 2m ago</span>
+            </div>
+            <ul className="priority-list">
+              <li>Trip 4825 • Driver assigned and en route</li>
+              <li>Maintenance review • Vehicle #TX-102 needs inspection</li>
+              <li>Fuel alert • Route 9 consumption is above target</li>
+            </ul>
+          </article>
+
+          <article className="panel-card">
+            <div className="panel-heading">
+              <h3>Operational Snapshot</h3>
+              <span>AI-assisted insight</span>
+            </div>
+            <p className="hero-copy">Suggested action: reassign one available vehicle to reduce downtime by 14% this afternoon.</p>
+          </article>
+        </section>
+      </main>
     </div>
   );
 }
