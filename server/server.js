@@ -14,6 +14,8 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const User = require('./models/User');
+
 // Database Connection
 const connectDB = async () => {
   try {
@@ -22,6 +24,17 @@ const connectDB = async () => {
       useUnifiedTopology: true,
     });
     console.log('MongoDB connected successfully');
+
+    const existingUser = await User.findOne({ email: 'admin@transitops.com' });
+    if (!existingUser) {
+      await User.create({
+        name: 'TransitOps Admin',
+        email: 'admin@transitops.com',
+        password: 'TransitOps123',
+        role: 'Admin',
+      });
+      console.log('Seeded default admin user: admin@transitops.com / TransitOps123');
+    }
   } catch (error) {
     console.error('MongoDB connection error:', error);
     process.exit(1);

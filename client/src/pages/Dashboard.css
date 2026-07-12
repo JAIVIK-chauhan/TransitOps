@@ -233,6 +233,61 @@
   gap: 0.6rem;
 }
 
+.stack-form {
+  display: grid;
+  gap: 0.6rem;
+  margin-bottom: 0.9rem;
+}
+
+.stack-form input,
+.stack-form select {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 0.7rem 0.8rem;
+  background: white;
+}
+
+.primary-button {
+  border: 0;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #2563eb, #0ea5e9);
+  color: white;
+  padding: 0.7rem 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.list-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.8rem;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 0.8rem;
+  border-radius: 10px;
+  background: #f8fafc;
+}
+
+.row-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.row-actions button {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.3rem 0.55rem;
+  background: #e2e8f0;
+  cursor: pointer;
+}
+
 @media (max-width: 980px) {
   .dashboard-shell { grid-template-columns: 1fr; }
   .dashboard-sidebar { order: 2; }
